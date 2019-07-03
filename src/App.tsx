@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, unstable_Profiler } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import NewItemForm from './components/NewItemForm/NewItemForm'
+import { Item } from './models/item'
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface State {
+    newItem: Item,
+    items: Item[]
 }
 
-export default App;
+class App extends Component<{}, State> {
+    state = {
+        newItem: {
+            id: 0,
+            name: ''
+        },
+        items: []
+    }
+
+    private addItem = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+
+        this.setState(prevState => ({
+            newItem: {
+                id: prevState.newItem.id + 1,
+                name: ''
+            },
+            items: [ ...prevState.items, prevState.newItem]
+        }))
+    }
+
+    private handleItemChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                name: event.target.value
+            }
+        })
+    }
+
+    private deleteItem = (itemToDelete: Item) => {
+        this.setState(prevState => {
+            items: [ ...prevState.items.filter(item => item.id !== itemToDelete.id)]
+        })
+    }
+
+    render () {
+        const { newItem } = this.state
+
+        return (
+            <div>
+                <h3>Grocerist</h3>
+                <NewItemForm
+                    item={newItem}
+                    onAdd={this.addItem}
+                    onChange={this.handleItemChange}
+                />
+            </div>
+        )
+    }
+}
+
+export default App
