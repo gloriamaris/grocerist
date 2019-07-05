@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import NewItemForm from './components/NewItemForm/NewItemForm'
 import ItemsList from './components/ItemsList/ItemsList'
 import { Item } from './models/item'
-
+import { Container, Title, Hero } from 'rbx'
+import 'rbx/index.css'
 
 const App = () => {
   const [newItem, setNewItem] = useState<Item>({ id: 0, name: '' })
@@ -11,7 +12,7 @@ const App = () => {
   const addItem = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const item = { id: newItem.id + 1, name: newItem.name }
-    
+
     setNewItem({ ...item })
     setItems([item, ...items])
   }
@@ -27,20 +28,27 @@ const App = () => {
     setItems([...items.filter(item => item.id !== itemToDelete.id)])
   }
 
-  console.log({ items })
   return (
-    <div>
-      <h3>Grocerist</h3>
-      <NewItemForm
-        item={newItem}
-        onAdd={addItem}
-        onChange={handleItemChange}
-      />
-      <ItemsList
-        items={items}
-        onDelete={deleteItem}
-      />
-    </div>
+    <Fragment>
+      <Container fluid>
+        <Hero>
+          <Container>
+            <Hero.Body>
+              <Title>Grocerist</Title>
+            </Hero.Body>
+          </Container>
+        </Hero>
+        <NewItemForm
+          item={newItem}
+          onAdd={addItem}
+          onChange={handleItemChange}
+        />
+        <ItemsList
+          items={items}
+          onDelete={deleteItem}
+        />
+      </Container>
+    </Fragment>
   )
 
 }

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, Fragment } from 'react'
 import { Item } from '../../models/item'
 import GroceryListItem from '../GroceryListItem/GroceryListItem'
 
@@ -8,13 +8,13 @@ interface Props {
 }
 
 const ItemsList: FunctionComponent<Props> = ({ items, onDelete }) => (
-  <ul>
-    {
-      items.map((item, i) => (
-        <GroceryListItem key={i} item={item} onDelete={onDelete} />
-      ))
-    }
-  </ul>
+    <Fragment>
+      {
+        items.map((item, i) => (
+          <GroceryListItem key={i} item={item} onDelete={onDelete} />
+        ))
+      }
+    </Fragment>
 )
 
 export default ItemsList

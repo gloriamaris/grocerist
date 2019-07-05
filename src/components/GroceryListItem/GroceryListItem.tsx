@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { Item } from '../../models/item'
+import { Button, Card } from 'rbx'
 
 interface Props {
   item: Item,
@@ -12,9 +13,11 @@ const GroceryListItem: FunctionComponent<Props> = ({ item, onDelete }) => {
   }
 
   return (
-    <li>
-      {item.name} <button onClick={onClick}>X</button>
-    </li>
+    <Card>
+      <Card.Content>
+        {item.name} <Button color="success" size="small" onClick={onClick}>X</Button>
+      </Card.Content>
+    </Card>
   )
 }
 

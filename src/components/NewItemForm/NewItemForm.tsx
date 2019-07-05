@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react"
 import { Item } from "../../models/item"
+import { Field, Control, Input, Button } from 'rbx'
 
 /**
  * Generic interface Props
@@ -14,8 +15,14 @@ interface Props {
 
 const NewItemForm: FunctionComponent<Props> = ({ onChange, onAdd, item }) => (
   <form onSubmit={onAdd}>
-    <input onChange={onChange} value={item.name}/>
-    <button type="submit">Add item</button>
+    <Field kind="addons">
+      <Control expanded>
+        <Input onChange={onChange} value={item.name} />
+      </Control>
+      <Control>
+        <Button type="submit" color="primary">Add item</Button>
+      </Control>
+    </Field>
   </form>
 )
 
