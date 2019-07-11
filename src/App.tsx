@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import NewItemForm from './components/NewItemForm/NewItemForm'
 import ItemsList from './components/ItemsList/ItemsList'
+import Menu from './components/Menu/Menu'
 import { Item } from './models/item'
-import { Container, Title, Hero } from 'rbx'
+import { Column, Divider, Section } from 'rbx'
 import 'rbx/index.css'
 
 const App = () => {
@@ -29,26 +30,25 @@ const App = () => {
   }
 
   return (
-    <Fragment>
-      <Container fluid>
-        <Hero>
-          <Container>
-            <Hero.Body>
-              <Title>Grocerist</Title>
-            </Hero.Body>
-          </Container>
-        </Hero>
-        <NewItemForm
-          item={newItem}
-          onAdd={addItem}
-          onChange={handleItemChange}
-        />
-        <ItemsList
-          items={items}
-          onDelete={deleteItem}
-        />
-      </Container>
-    </Fragment>
+    <div>
+      <Menu />
+      <Column.Group centered>
+        <Column size="half">
+          <Section>
+            <NewItemForm
+              item={newItem}
+              onAdd={addItem}
+              onChange={handleItemChange}
+            />
+            <Divider color="primary">Today, July 11</Divider>
+            <ItemsList
+              items={items}
+              onDelete={deleteItem}
+            />
+          </Section>
+        </Column>
+      </Column.Group>
+    </div>
   )
 
 }

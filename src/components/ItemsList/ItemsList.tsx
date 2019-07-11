@@ -8,13 +8,13 @@ interface Props {
 }
 
 const ItemsList: FunctionComponent<Props> = ({ items, onDelete }) => (
-    <Fragment>
-      {
-        items.map((item, i) => (
-          <GroceryListItem key={i} item={item} onDelete={onDelete} />
-        ))
-      }
-    </Fragment>
+  <Fragment>
+    {
+      items.map((item, i) => (
+        <GroceryListItem key={i} item={item} onDelete={onDelete} />
+      ))
+    }
+  </Fragment>
 )
 
 export default ItemsList
